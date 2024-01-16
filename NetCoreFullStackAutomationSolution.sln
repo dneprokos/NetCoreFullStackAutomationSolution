@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dneprokos.Helper.Base.Clien
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlMockedTests", "SqlMockedTests", "{6CBE6A94-89D3-4EC6-91A2-08EA6303322B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dneprokos.Mocked.Sql.Tests", "Dneprokos.Mocked.Sql.Tests\Dneprokos.Mocked.Sql.Tests.csproj", "{B97BEC41-A95F-4ABE-9162-A7B79E70622F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dneprokos.Mocked.Sql.Tests", "Dneprokos.Mocked.Sql.Tests\Dneprokos.Mocked.Sql.Tests.csproj", "{B97BEC41-A95F-4ABE-9162-A7B79E70622F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dneprokos.Mocked.Sql.Client", "Dneprokos.Mocked.Sql.Client\Dneprokos.Mocked.Sql.Client.csproj", "{A8B6D752-BDDA-4DD8-991C-6E0480CD0539}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{B97BEC41-A95F-4ABE-9162-A7B79E70622F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B97BEC41-A95F-4ABE-9162-A7B79E70622F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B97BEC41-A95F-4ABE-9162-A7B79E70622F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8B6D752-BDDA-4DD8-991C-6E0480CD0539}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8B6D752-BDDA-4DD8-991C-6E0480CD0539}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8B6D752-BDDA-4DD8-991C-6E0480CD0539}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8B6D752-BDDA-4DD8-991C-6E0480CD0539}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,6 +75,7 @@ Global
 		{3554110E-7073-4A4D-9ABF-EE8328EEB07F} = {01AFC526-F851-42FF-8165-BA1431578D01}
 		{6AB2DFCD-6E90-410A-B14F-D981377F14B4} = {9D50A074-8F5D-459B-9609-460E69E17389}
 		{B97BEC41-A95F-4ABE-9162-A7B79E70622F} = {6CBE6A94-89D3-4EC6-91A2-08EA6303322B}
+		{A8B6D752-BDDA-4DD8-991C-6E0480CD0539} = {6CBE6A94-89D3-4EC6-91A2-08EA6303322B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3261AF59-EA0B-484C-B488-90DFB0B8DC1D}
