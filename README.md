@@ -62,3 +62,27 @@ Note: You can update runsettings file name and run with runsetting you need
 
 ![run_test_from_cmd image](/images/run_test_from_cmd.png)
 
+### SqlMockedTests projects
+![db_test_project image](/images/db_test_project.png) 
+Client and project were designed to test base SQL client. Under the hood it runs docker container and inserts data during test run
+
+-----------------------------------------------------------------------------------------------
+#### Dneprokos.Mocked.Sql.Client
+Project stores some client data like models and scripts. Potentially can grow to custom client
+
+-----------------------------------------------------------------------------------------------
+#### Dneprokos.Mocked.Sql.Tests
+Test project was designed to run SQL based tests.
+
+- How to run the tests from Visual Studio
+
+1) Open "Test Explorer", top navigation menu Test --> Test Explorer (This step only required if you haven't opened it yet)
+2) Select .runsettings file, top navigation menu Test --> Configure Run Settings --> Select Solution Wide runsettings File
+3) Right click on test of group of the tests you want to run and select "Run" from context menu
+
+- How to run the tests from Command Line
+
+1) Open command line inside of the test project directory
+2) Type the following command "dotnet test --settings container_db_server.runsettings"
+
+Note: You can update runsettings file name and run with runsetting you need

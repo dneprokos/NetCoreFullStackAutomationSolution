@@ -8,14 +8,17 @@
 
   <ItemGroup>
     <PackageReference Include="DotNet.Testcontainers" Version="1.6.0" />
+    <PackageReference Include="FluentAssertions" Version="6.12.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
     <PackageReference Include="NUnit" Version="4.0.1" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
     <PackageReference Include="Testcontainers" Version="3.7.0" />
+    <PackageReference Include="Testcontainers.MsSql" Version="3.7.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Dneprokos.Helper.Base.Client\Dneprokos.Helper.Base.Client.csproj" />
+    <ProjectReference Include="..\Dneprokos.Mocked.Sql.Client\Dneprokos.Mocked.Sql.Client.csproj" />
     <ProjectReference Include="..\Dneprokos.SqlDb.Base.Client\Dneprokos.SqlDb.Base.Client.csproj" />
   </ItemGroup>
 
