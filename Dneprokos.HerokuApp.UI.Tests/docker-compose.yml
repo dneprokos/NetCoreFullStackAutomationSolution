@@ -1,0 +1,25 @@
+version: '3'
+services:
+  selenium-hub:
+    image: selenium/hub:latest
+    ports:
+      - "4442:4442" # for the event bus publisher
+      - "4443:4443" # for the event bus subscriber
+      - "4444:4444" # for the Selenium Grid hub
+    networks:
+      - grid
+
+  chrome-node:
+    image: selenium/node-chrome:latest
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    shm_size: 2g
+    networks:
+      - grid
+
+networks:
+  grid:
