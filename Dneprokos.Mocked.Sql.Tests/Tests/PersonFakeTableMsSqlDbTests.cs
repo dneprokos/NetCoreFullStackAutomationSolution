@@ -9,15 +9,17 @@ namespace Dneprokos.Mocked.Sql.Tests.Tests
     [TestFixture]
     public class PersonFakeTableMsSqlDbTests : DbTestsBase
     {
-        [Test]
-        public void CreateAndPopulatePersonTableTest()
+        private List<PersonDbModel>? allPersonsInDb;
+
+        [OneTimeSetUp]
+        public void BeforeAll()
         {
-            //Arrange
             SqlScriptsRunner!
                 .ExecuteQuerySingleOrDefault<object>(PersonTableSqlScripts.CreateTableScript);
             SqlScriptsRunner!
                 .ExecuteQuerySingleOrDefault<object>(PersonTableSqlScripts.InsertDefaultValuesScript);
-            var expectedPersons = new List<PersonDbModel>
+
+            allPersonsInDb = new List<PersonDbModel>
             {
                 new PersonDbModel
                 {
@@ -33,17 +35,92 @@ namespace Dneprokos.Mocked.Sql.Tests.Tests
                     LastName = "Doe",
                     IsActive = false
                 },
+                new PersonDbModel
+                {
+                    Id = 3,
+                    FirstName = "John",
+                    LastName = "Connar",
+                    IsActive = true
+                },
             };
+        }
 
+        [Test]
+        public void ExecuteQuery_UnitTest()
+        {
+            //Arrange
+            
             //Act
-            List<PersonDbModel> allPersons = SqlScriptsRunner
+            List<PersonDbModel> allPersons = SqlScriptsRunner!
                 .ExecuteQuery<PersonDbModel>("SELECT * FROM PERSON")
                 .ToList();
 
             //Assert
-            allPersons.Should().HaveCount(expectedPersons.Count);
+            allPersons.Should().HaveCount(allPersonsInDb!.Count);
             allPersons.Should()
-                .BeEquivalentTo(expectedPersons, p => p.Excluding(p => p.Id));
+                .BeEquivalentTo(allPersonsInDb, p => p.Excluding(p => p.Id));
+        }
+
+        [Test]
+        public void ExecuteQueryFirst_UnitTest()
+        {
+            //Arrange
+            PersonDbModel expectedFirstPerson = allPersonsInDb!.First();
+
+            //Act
+            PersonDbModel firstPerson = SqlScriptsRunner!
+                .ExecuteQueryFirst<PersonDbModel>("SELECT * FROM PERSON");
+
+            //Assert
+            firstPerson.Should().BeEquivalentTo(expectedFirstPerson);
+        }
+
+        [Test]
+        public void ExecuteQueryFirstOrDefault_UnitTest()
+        {
+            //Arrange
+            string searchFirstName = "Jane";
+            PersonDbModel expectedFirstPerson = allPersonsInDb!.First(p => p.FirstName == searchFirstName);
+
+            //Act
+            PersonDbModel firstPerson = SqlScriptsRunner!
+                .ExecuteQueryFirst<PersonDbModel>(
+                    $"SELECT * FROM PERSON WHERE {nameof(PersonDbModel.FirstName)} = '{searchFirstName}'");
+
+            //Assert
+            firstPerson.Should().BeEquivalentTo(expectedFirstPerson);
+        }
+
+        [Test]
+        public void ExecuteQuerySingle_UnitTest()
+        {
+            //Arrange
+            string searchFirstName = "Jane";
+            PersonDbModel expectedSinglePerson = allPersonsInDb!.First(p => p.FirstName == searchFirstName);
+
+            //Act
+            PersonDbModel singlePerson = SqlScriptsRunner!
+                .ExecuteQuerySingle<PersonDbModel>(
+                    $"SELECT * FROM PERSON WHERE {nameof(PersonDbModel.FirstName)} = '{searchFirstName}'");
+
+            //Assert
+            singlePerson.Should().BeEquivalentTo(expectedSinglePerson);
+        }
+
+        [Test]
+        public void ExecuteQuerySingleOrDefault_UnitTest()
+        {
+            //Arrange
+            string searchFirstName = "Jane";
+            PersonDbModel expectedSingleOrDefaultPerson = allPersonsInDb!.First(p => p.FirstName == searchFirstName);
+
+            //Act
+            PersonDbModel singleOrDefaultPerson = SqlScriptsRunner!
+                .ExecuteQuerySingleOrDefault<PersonDbModel>(
+                    $"SELECT * FROM PERSON WHERE {nameof(PersonDbModel.FirstName)} = '{searchFirstName}'");
+
+            //Assert
+            singleOrDefaultPerson.Should().BeEquivalentTo(expectedSingleOrDefaultPerson);
         }
     }
 }
