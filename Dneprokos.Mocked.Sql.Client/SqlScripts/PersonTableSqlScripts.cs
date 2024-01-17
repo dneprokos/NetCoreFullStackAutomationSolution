@@ -14,6 +14,7 @@
         public const string InsertDefaultValuesScript = @"
                 INSERT INTO Person (FirstName, LastName, IsActive)
                 VALUES ('John', 'Doe', 1),
-                ('Jane', 'Doe', 0);";
+                ('Jane', 'Doe', 0),
+                ('John', 'Connar', 1);";
     }
 }
