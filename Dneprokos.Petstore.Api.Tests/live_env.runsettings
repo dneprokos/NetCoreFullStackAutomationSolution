@@ -1,0 +1,22 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<RunSettings>
+	<!-- Parameters used by tests at runtime -->
+	<RunConfiguration>
+		<!-- x86 or x64 -->
+		<!-- You can also change it from the Test menu; choose "Processor Architecture for AnyCPU Projects" -->
+		<TargetPlatform>x64</TargetPlatform>
+	</RunConfiguration>
+	<TestRunParameters>
+		<!--NLog config-->
+		<Parameter name="logLevel" value="Debug"/>
+	</TestRunParameters>
+	<NUnit>
+		<Verbosity>5</Verbosity>
+		<DumpXmlTestResults>true</DumpXmlTestResults>
+		<DumpXmlTestDiscovery>true</DumpXmlTestDiscovery>
+		<DiscoveryMethod>Current</DiscoveryMethod>
+		<!-- will dump the xml report in the project directory bin\Debug\net6.0\XmlTestResults -->
+		<TestOutputXml>XmlTestResults</TestOutputXml>
+		<NewOutputXmlFileForEachRun>true</NewOutputXmlFileForEachRun>
+	</NUnit>
+</RunSettings>

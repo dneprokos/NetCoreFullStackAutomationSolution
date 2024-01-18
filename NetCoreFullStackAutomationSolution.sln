@@ -23,7 +23,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlMockedTests", "SqlMocked
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dneprokos.Mocked.Sql.Tests", "Dneprokos.Mocked.Sql.Tests\Dneprokos.Mocked.Sql.Tests.csproj", "{B97BEC41-A95F-4ABE-9162-A7B79E70622F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dneprokos.Mocked.Sql.Client", "Dneprokos.Mocked.Sql.Client\Dneprokos.Mocked.Sql.Client.csproj", "{A8B6D752-BDDA-4DD8-991C-6E0480CD0539}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dneprokos.Mocked.Sql.Client", "Dneprokos.Mocked.Sql.Client\Dneprokos.Mocked.Sql.Client.csproj", "{A8B6D752-BDDA-4DD8-991C-6E0480CD0539}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PetStoreTests", "PetStoreTests", "{C53D25FE-8032-4EA0-AF20-F3B18D83F3C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dneprokos.Petstore.Api.Client", "Dneprokos.Petstore.Api.Client\Dneprokos.Petstore.Api.Client.csproj", "{923619D7-58A2-44AD-BD77-3C2692EF41E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dneprokos.Petstore.Api.Tests", "Dneprokos.Petstore.Api.Tests\Dneprokos.Petstore.Api.Tests.csproj", "{6AF5420A-79E4-4161-B72D-F52859CD6C7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +69,14 @@ Global
 		{A8B6D752-BDDA-4DD8-991C-6E0480CD0539}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8B6D752-BDDA-4DD8-991C-6E0480CD0539}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8B6D752-BDDA-4DD8-991C-6E0480CD0539}.Release|Any CPU.Build.0 = Release|Any CPU
+		{923619D7-58A2-44AD-BD77-3C2692EF41E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{923619D7-58A2-44AD-BD77-3C2692EF41E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{923619D7-58A2-44AD-BD77-3C2692EF41E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{923619D7-58A2-44AD-BD77-3C2692EF41E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AF5420A-79E4-4161-B72D-F52859CD6C7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AF5420A-79E4-4161-B72D-F52859CD6C7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AF5420A-79E4-4161-B72D-F52859CD6C7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AF5420A-79E4-4161-B72D-F52859CD6C7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +90,8 @@ Global
 		{6AB2DFCD-6E90-410A-B14F-D981377F14B4} = {9D50A074-8F5D-459B-9609-460E69E17389}
 		{B97BEC41-A95F-4ABE-9162-A7B79E70622F} = {6CBE6A94-89D3-4EC6-91A2-08EA6303322B}
 		{A8B6D752-BDDA-4DD8-991C-6E0480CD0539} = {6CBE6A94-89D3-4EC6-91A2-08EA6303322B}
+		{923619D7-58A2-44AD-BD77-3C2692EF41E0} = {C53D25FE-8032-4EA0-AF20-F3B18D83F3C4}
+		{6AF5420A-79E4-4161-B72D-F52859CD6C7F} = {C53D25FE-8032-4EA0-AF20-F3B18D83F3C4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3261AF59-EA0B-484C-B488-90DFB0B8DC1D}
