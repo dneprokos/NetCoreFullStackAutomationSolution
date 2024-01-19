@@ -36,7 +36,7 @@ Selenium WebDriver helpers. Very useful if you want to create UI tests
 ### HerokuApp projects
 ![heroku_app image](/images/heroku_app.png) 
 
-Client and Test projects for "https://the-internet.herokuapp.com/" application.
+Client and Test projects for "https://the-internet.herokuapp.com/" application. 
 This project was created as UI project test example and has possibilityt to run tests locally or using contanerized app
 
 -----------------------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ Note: You can update runsettings file name and run with runsetting you need
 
 ### SqlMockedTests projects
 ![db_test_project image](/images/db_test_project.png) 
-Client and project were designed to test base SQL client. Under the hood it runs docker container and inserts data during test run
+Client and project were designed to show power of CORE SQL projct. Under the hood it runs docker container and inserts data during test run
 
 -----------------------------------------------------------------------------------------------
 #### Dneprokos.Mocked.Sql.Client
@@ -84,5 +84,36 @@ Test project was designed to run SQL based tests.
 
 1) Open command line inside of the test project directory
 2) Type the following command "dotnet test --settings container_db_server.runsettings"
+
+Note: You can update runsettings file name and run with runsetting you need
+
+
+### MoviesApiTests projects
+![movies_api image](/images/movies_api.png) 
+
+These test project and client controller were designed to show a power of BaseApi project.
+
+-----------------------------------------------------------------------------------------------
+#### Dneprokos.Movies.Api.Client
+This is a base Client project that covers Controller, Models, Builder and helpers for running Movies microservice REST API requests
+
+-----------------------------------------------------------------------------------------------
+#### Dneprokos.Movies.Api.Tests
+This is a project with REST API tests for the Movies microservice
+
+- Prerequisites
+
+1) Please pull and run the following microservice before start running the tests https://github.com/dneprokos/node-rest-services
+
+- How to run the tests from Visual Studio
+
+1) Open "Test Explorer", top navigation menu Test --> Test Explorer (This step only required if you haven't opened it yet)
+2) Select .runsettings file, top navigation menu Test --> Configure Run Settings --> Select Solution Wide runsettings File
+3) Right click on test of group of the tests you want to run and select "Run" from context menu
+
+- How to run the tests from Command Line
+
+1) Open command line inside of the test project directory
+2) Type the following command "dotnet test --settings localhost5000.runsettings"
 
 Note: You can update runsettings file name and run with runsetting you need

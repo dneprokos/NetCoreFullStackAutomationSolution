@@ -8,10 +8,11 @@
 	</RunConfiguration>
 	<TestRunParameters>
 		<!--Environment specific-->
-		<Parameter name="serverAppUrl" value="https://the-internet.herokuapp.com" />
-		<!--WebDriver Settings-->
-		<Parameter name="browser" value="chrome" />
-		<Parameter name="isRemoteBrowser" value="false" />
+		<Parameter name="baseUrl" value="http://localhost:5000/api" />
+		<Parameter name="regularUserName" value="test" />
+		<Parameter name="regularPassword" value="testpassword" />
+		<Parameter name="adminUserName" value="testadmin" />
+		<Parameter name="adminPassword" value="testadminpassword" />
 		<!--NLog config-->
 		<Parameter name="logLevel" value="Debug"/>
 	</TestRunParameters>

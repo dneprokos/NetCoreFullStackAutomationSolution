@@ -1,5 +1,4 @@
 ﻿using Dneprokos.Helper.Base.Client.Loggers.Managers;
-using Dneprokos.SqlDb.Base.Client.SqlCore;
 using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 using Testcontainers.MsSql;

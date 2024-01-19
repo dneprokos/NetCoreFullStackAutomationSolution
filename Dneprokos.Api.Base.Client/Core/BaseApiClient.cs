@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
+using RestSharp.Authenticators;
 using System.Net;
 
 namespace Dneprokos.Api.Base.Client.Core
@@ -9,49 +10,244 @@ namespace Dneprokos.Api.Base.Client.Core
     public class BaseApiClient
     {
         private readonly RestClient restClient;
-        private readonly RestRequest request;
+        private RestRequest request;
         public ILogger? Log { get; set; }
 
         #region Constructors
 
+        /// <summary>
+        /// Initialize Base API Client
+        /// </summary>
+        /// <param name="logger">Logger instance</param>
         public BaseApiClient(ILogger? logger = null)
         {
             restClient = new RestClient();
-            request = new RestRequest() { Method = Method.Post };
             Log = logger;
         }
 
+        /// <summary>
+        /// Initialize Base API Client
+        /// </summary>
+        /// <param name="options">Rest Client Options</param>
+        /// <param name="logger">Logger instance</param>
         public BaseApiClient(RestClientOptions options, ILogger? logger = null)
         {
             restClient = new RestClient(options);
-            request = new RestRequest() { Method = Method.Post };
             Log = logger;
         }
 
+        /// <summary>
+        /// Initialize Base API Client
+        /// </summary>
+        /// <param name="baseUrl">Base URL</param>
+        /// <param name="method">HTTP Method</param>
+        /// <param name="logger">Logger instance</param>
         public BaseApiClient(string baseUrl, ILogger? logger = null)
         {
             var options = new RestClientOptions(baseUrl);
             restClient = new RestClient(options);
-            request = new RestRequest() { Method = Method.Post };
             Log = logger;
+        }
+
+        public BaseApiClient(string baseUrl, IAuthenticator authentication, ILogger? logger = null)
+        {
+            var options = new RestClientOptions(baseUrl)
+            {
+                Authenticator = authentication,
+            };
+            restClient = new RestClient(options);
+            Log = logger;
+        }
+
+        #endregion
+
+        #region Request builder
+
+        /// <summary>
+        /// Initialize RestRequest
+        /// </summary>
+        /// <param name="resourcePath">Resource url path</param>
+        /// <param name="method">Method</param>
+        /// <returns></returns>
+        public BaseApiClient AddRequest(string resourcePath, Method method)
+        {
+            request = new RestRequest(resourcePath, method);
+            return this;
+        }
+
+        /// <summary>
+        /// Initialize RestRequest
+        /// </summary>
+        /// <param name="resourcePath">Resource url path</param>
+        /// <param name="authenticator">Authentication</param>
+        /// <param name="method">Method</param>
+        /// <returns></returns>
+        public BaseApiClient AddRequest(string resourcePath, IAuthenticator authenticator, Method method)
+        {
+            request = new RestRequest(resourcePath, method)
+            {
+                Authenticator = authenticator
+            };
+            return this;
+        }
+
+        /// <summary>
+        /// Initialize Request with POST method
+        /// </summary>
+        /// <param name="resourcePath">Resource url path</param>
+        /// <returns></returns>
+        public BaseApiClient UsePostMethod(string resourcePath)
+        {
+            return AddRequest(resourcePath, Method.Post);
+        }
+
+        /// <summary>
+        /// Initialize Request with POST method
+        /// </summary>
+        /// <param name="resourcePath">Resource url path</param>
+        /// <returns></returns>
+        public BaseApiClient UsePostMethod(string resourcePath, IAuthenticator authenticator)
+        {
+            return AddRequest(resourcePath, authenticator, Method.Post);
+        }
+
+        /// <summary>
+        /// Initializes Request with GET method
+        /// </summary>
+        /// <param name="resourcePath">Resource url path</param>
+        /// <returns></returns>
+        public BaseApiClient UseGetMethod(string resourcePath)
+        {
+            return AddRequest(resourcePath, Method.Get);
+        }
+
+        /// <summary>
+        /// Initializes Request with GET method
+        /// </summary>
+        /// <param name="resourcePath">Resource url path</param>
+        /// <param name="authenticator">Authentication</param>
+        /// <returns></returns>
+        public BaseApiClient UseGetMethod(string resourcePath, IAuthenticator authenticator)
+        {
+            return AddRequest(resourcePath, authenticator, Method.Get);
+        }
+
+        /// <summary>
+        /// Initialize Request with PUT method
+        /// </summary>
+        /// <param name="resourcePath">Resource url path</param>
+        /// <returns></returns>
+        public BaseApiClient UsePutMethod(string resourcePath)
+        {
+            return AddRequest(resourcePath, Method.Put);
+        }
+
+        /// <summary>
+        /// Initialize Request with PUT method
+        /// </summary>
+        /// <param name="resourcePath">Resource url path</param>
+        /// <param name="authenticator"></param>
+        /// <returns></returns>
+        public BaseApiClient UsePutMethod(string resourcePath, IAuthenticator authenticator)
+        {
+            return AddRequest(resourcePath, Method.Put);
+        }
+
+        /// <summary>
+        /// Initialize Request with PATCH method
+        /// </summary>
+        /// <param name="resourcePath">Resource url path</param>
+        /// <returns></returns>
+        public BaseApiClient UsePatchMethod(string resourcePath)
+        {
+            return AddRequest(resourcePath, Method.Patch);
+        }
+
+        /// <summary>
+        /// Initialize Request with PATCH method
+        /// </summary>
+        /// <param name="resourcePath">Resource url path</param>
+        /// <param name="authenticator">Authentication</param>
+        /// <returns></returns>
+        public BaseApiClient UsePatchMethod(string resourcePath, IAuthenticator authenticator)
+        {
+            return AddRequest(resourcePath, authenticator, Method.Patch);
+        }
+
+        /// <summary>
+        /// Initialize Request with SEARCH method
+        /// </summary>
+        /// <param name="resourcePath">Resource url path</param>
+        /// <returns></returns>
+        public BaseApiClient UseSearchMethod(string resourcePath)
+        {
+            return AddRequest(resourcePath, Method.Search);
+        }
+
+        /// <summary>
+        /// Initialize Request with SEARCH method
+        /// </summary>
+        /// <param name="resourcePath">Resource url path</param>
+        /// <param name="authenticator">Authentication</param>
+        /// <returns></returns>
+        public BaseApiClient UseSearchMethod(string resourcePath, IAuthenticator authenticator)
+        {
+            return AddRequest(resourcePath, authenticator, Method.Search);
+        }
+
+        /// <summary>
+        /// Initialize Request with COPY method
+        /// </summary>
+        /// <param name="resourcePath">Resource url path</param>
+        /// <returns></returns>
+        public BaseApiClient UseCopyMethod(string resourcePath)
+        {
+            return AddRequest(resourcePath, Method.Copy);
+        }
+
+        /// <summary>
+        /// Initialize Request with COPY method
+        /// </summary>
+        /// <param name="resourcePath">Resource url path</param>
+        /// <param name="authenticator">Authentication</param>
+        /// <returns></returns>
+        public BaseApiClient UseCopyMethod(string resourcePath, IAuthenticator authenticator)
+        {
+            return AddRequest(resourcePath, authenticator, Method.Copy);
         }
 
         #endregion
 
         #region Headers
 
+        /// <summary>
+        /// Adds header
+        /// </summary>
+        /// <param name="header">Header KeyValuePair</param>
+        /// <returns></returns>
         public BaseApiClient AddHeader(KeyValuePair<string, string> header)
         {
             restClient.AddDefaultHeader(header.Key, header.Value);
             return this;
         }
 
+        /// <summary>
+        /// Adds header
+        /// </summary>
+        /// <param name="key">Header key</param>
+        /// <param name="value">Header value</param>
+        /// <returns></returns>
         public BaseApiClient AddHeader(string key, string value)
         {
             restClient.AddDefaultHeader(key, value);
             return this;
         }
 
+        /// <summary>
+        /// Adds header
+        /// </summary>
+        /// <param name="headers">Dictionary of headers</param>
+        /// <returns></returns>
         public BaseApiClient AddHeaders(Dictionary<string, string> headers)
         {
             restClient.AddDefaultHeaders(headers);
@@ -62,12 +258,25 @@ namespace Dneprokos.Api.Base.Client.Core
 
         #region Cookies
 
+        /// <summary>
+        /// Adds cookies
+        /// </summary>
+        /// <param name="name">Name</param>
+        /// <param name="value">Value</param>
+        /// <param name="path">Path</param>
+        /// <param name="domain">Domain</param>
+        /// <returns></returns>
         public BaseApiClient AddCookie(string name, string value, string path, string domain)
         {
             request.AddCookie(name, value, path, domain);
             return this;
         }
 
+        /// <summary>
+        /// Adds cookies
+        /// </summary>
+        /// <param name="cookieContainer">Container with cookies</param>
+        /// <returns></returns>
         public BaseApiClient AddCookies(CookieContainer cookieContainer)
         {
             request.CookieContainer = cookieContainer;
@@ -78,6 +287,11 @@ namespace Dneprokos.Api.Base.Client.Core
 
         #region Method
 
+        /// <summary>
+        /// Add method
+        /// </summary>
+        /// <param name="method">Http method</param>
+        /// <returns></returns>
         public BaseApiClient AddMethod(Method method)
         {
             request.Method = method;
@@ -88,15 +302,26 @@ namespace Dneprokos.Api.Base.Client.Core
 
         #region Body
 
+        /// <summary>
+        /// Adds body
+        /// </summary>
+        /// <param name="queryString"></param>
+        /// <returns></returns>
         public BaseApiClient AddBody(string queryString)
         {
             request.AddBody(new { query = queryString });
             return this;
         }
 
-        public BaseApiClient AddBody<T>(T query)
+        /// <summary>
+        /// Adds body
+        /// </summary>
+        /// <typeparam name="T">ObjectType</typeparam>
+        /// <param name="model">Object to pass</param>
+        /// <returns></returns>
+        public BaseApiClient AddBody<T>(T model)
         {
-            string jsonBody = JsonConvert.SerializeObject(query);
+            string jsonBody = JsonConvert.SerializeObject(model);
             request.AddBody(jsonBody, "application/json");
             return this;
         }
@@ -105,23 +330,27 @@ namespace Dneprokos.Api.Base.Client.Core
 
         #region Send request
 
-        public RestResponse SendQueryRequest()
+        /// <summary>
+        /// Sends prepared request
+        /// </summary>
+        /// <returns></returns>
+        public RestResponse SendRequest()
         {
-            RestResponse response = restClient.Post(request);
+            RestResponse response = restClient.Execute(request);
             PerformRequestLog(request, response);
 
             return response;
         }
 
-        public RestResponse SendQueryRequest(string queryString)
+        /// <summary>
+        /// Sends prepared request
+        /// </summary>
+        /// <param name="bodyString">String body</param>
+        /// <returns></returns>
+        public RestResponse SendRequest(string bodyString)
         {
-            var request = new RestRequest()
-            {
-                Method = Method.Post
-            }
-            .AddBody(new { query = queryString });
-
-            RestResponse response = restClient.Post(request);
+            request.AddBody(new { query = bodyString });
+            RestResponse response = restClient.Execute(request);
             PerformRequestLog(request, response);
 
             return response;
