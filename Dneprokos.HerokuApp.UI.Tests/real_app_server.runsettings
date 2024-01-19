@@ -13,7 +13,7 @@
 		<Parameter name="browser" value="chrome" />
 		<Parameter name="isRemoteBrowser" value="false" />
 		<!--NLog config-->
-		<Parameter name="logLevel" value="Info"/>
+		<Parameter name="logLevel" value="Debug"/>
 	</TestRunParameters>
 	<NUnit>
 		<Verbosity>5</Verbosity>

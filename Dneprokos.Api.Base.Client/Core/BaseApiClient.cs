@@ -1,5 +1,4 @@
-﻿using Dneprokos.Api.Base.Client.Authorizations;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -257,15 +256,6 @@ namespace Dneprokos.Api.Base.Client.Core
 
         #endregion
 
-        #region Authorization
-
-        public BaseApiClient AddBasicAuthorization(BasicAuthorization basicAuthCreds)
-        {
-            return this;
-        }
-
-        #endregion
-
         #region Cookies
 
         /// <summary>
@@ -446,6 +436,12 @@ namespace Dneprokos.Api.Base.Client.Core
 
             return queryValue;
         }
+
+        #endregion
+
+        #region Private methods
+
+
 
         #endregion
     }
