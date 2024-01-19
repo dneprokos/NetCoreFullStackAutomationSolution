@@ -1,4 +1,5 @@
 ﻿using Dneprokos.Api.Base.Client.Core;
+using Flurl;
 using Microsoft.Extensions.Logging;
 
 namespace Dneprokos.Movies.Api.Client.RequestsBuilder.Base
@@ -7,9 +8,21 @@ namespace Dneprokos.Movies.Api.Client.RequestsBuilder.Base
     {
         protected string? SearchUrl;
 
+        public KeyValuePair<string, string> DefaultAcceptHeader = new("accept", "application/json"); 
+
         public MoviesRequestBuilderBase(string baseUrl, ILogger logger)
             : base(baseUrl, logger)
         {
+        }
+
+        public void AddQueryPage(int page)
+        {
+            SearchUrl = SearchUrl.SetQueryParam("page", page);
+        }
+
+        public void AddQueryLimit(int limit)
+        {
+            SearchUrl = SearchUrl.SetQueryParam("limit", limit);
         }
     }
 }

@@ -146,11 +146,32 @@ namespace Dneprokos.Api.Base.Client.Core
         /// Initialize Request with PUT method
         /// </summary>
         /// <param name="resourcePath">Resource url path</param>
-        /// <param name="authenticator"></param>
+        /// <param name="authenticator">Authentication</param>
         /// <returns></returns>
         public BaseApiClient UsePutMethod(string resourcePath, IAuthenticator authenticator)
         {
-            return AddRequest(resourcePath, Method.Put);
+            return AddRequest(resourcePath, authenticator, Method.Put);
+        }
+
+        /// <summary>
+        /// Initialize Request with DELETE method
+        /// </summary>
+        /// <param name="resourcePath">Resource url path</param>
+        /// <returns></returns>
+        public BaseApiClient UseDeleteMethod(string resourcePath)
+        {
+            return AddRequest(resourcePath, Method.Delete);
+        }
+
+        /// <summary>
+        /// Initialize Request with DELETE method
+        /// </summary>
+        /// <param name="resourcePath">Resource url path</param>
+        /// <param name="authenticator">Authentication</param>
+        /// <returns></returns>
+        public BaseApiClient UseDeleteMethod(string resourcePath, IAuthenticator authenticator)
+        {
+            return AddRequest(resourcePath, authenticator, Method.Delete);
         }
 
         /// <summary>
