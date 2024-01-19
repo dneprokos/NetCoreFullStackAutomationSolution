@@ -438,11 +438,5 @@ namespace Dneprokos.Api.Base.Client.Core
         }
 
         #endregion
-
-        #region Private methods
-
-
-
-        #endregion
     }
 }

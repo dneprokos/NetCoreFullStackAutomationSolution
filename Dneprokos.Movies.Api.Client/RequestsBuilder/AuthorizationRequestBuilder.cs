@@ -1,15 +1,14 @@
-﻿using Dneprokos.Api.Base.Client.Core;
-using Dneprokos.Movies.Api.Client.Data;
+﻿using Dneprokos.Movies.Api.Client.Data;
+using Dneprokos.Movies.Api.Client.Models.Authorization;
+using Dneprokos.Movies.Api.Client.RequestsBuilder.Base;
 using Flurl;
 using Microsoft.Extensions.Logging;
 using RestSharp;
 
 namespace Dneprokos.Movies.Api.Client.RequestsBuilder
 {
-    public class AuthorizationRequestBuilder : BaseApiClient
+    public class AuthorizationRequestBuilder : MoviesRequestBuilderBase
     {
-        private string SearchUrl;
-
         public AuthorizationRequestBuilder(string baseUrl, ILogger logger) 
             : base(baseUrl, logger)
         {
@@ -28,9 +27,16 @@ namespace Dneprokos.Movies.Api.Client.RequestsBuilder
             return this;
         }
 
+        public AuthorizationRequestBuilder WithQueryAuthorizationParams(AuthorizationRequestParams queryParams) 
+        {
+            SearchUrl = SearchUrl.SetQueryParam("username", queryParams.UserName);
+            SearchUrl = SearchUrl.SetQueryParam("password", queryParams.Password);
+            return this;
+        }
+
         public RestResponse SendPostRequest()
         {
-            return UsePostMethod(SearchUrl)
+            return UsePostMethod(SearchUrl!)
                 .AddHeader("accept", "application/json")
                 .SendRequest();
         }
