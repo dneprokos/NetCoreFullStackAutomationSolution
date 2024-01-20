@@ -7,6 +7,7 @@ using Dneprokos.UI.Base.Client.SeleniumHelpers;
 
 namespace Dneprokos.HerokuApp.UI.Tests.BaseClasses
 {
+    [TestFixture]
     public class HerokuAppBaseTests : ConcurrentDriverBaseTests
     {
         protected string? BaseUrl { get; set; }
