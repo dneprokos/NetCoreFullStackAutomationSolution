@@ -76,6 +76,7 @@ namespace Dneprokos.Movies.Api.Client.RequestsBuilder
         {
             return UsePostMethod(MoviesEndpointsUrls.Movies(), authenticator)
                 .AddHeader(DefaultAcceptHeader)
+                .AddHeader(DefaultContentType)
                 .AddBody(_body)
                 .SendRequest();
         }

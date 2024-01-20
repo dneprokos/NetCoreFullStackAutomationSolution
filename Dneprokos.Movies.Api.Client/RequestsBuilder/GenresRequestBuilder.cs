@@ -77,6 +77,7 @@ namespace Dneprokos.Movies.Api.Client.RequestsBuilder
         {
             return UsePostMethod(MoviesEndpointsUrls.Genres(), authenticator)
                 .AddHeader(DefaultAcceptHeader)
+                .AddHeader(DefaultContentType)
                 .AddBody(_body)
                 .SendRequest();
         }
@@ -85,6 +86,7 @@ namespace Dneprokos.Movies.Api.Client.RequestsBuilder
         {
             return UsePostMethod(MoviesEndpointsUrls.Genres(), authenticator)
                 .AddHeader(DefaultAcceptHeader)
+                .AddHeader(DefaultContentType)
                 .AddBody(_bulkBody)
                 .SendRequest();
         }
@@ -100,6 +102,7 @@ namespace Dneprokos.Movies.Api.Client.RequestsBuilder
         {
             return UsePutMethod(MoviesEndpointsUrls.Genres(id), authenticator)
                 .AddHeader(DefaultAcceptHeader)
+                .AddHeader(DefaultContentType)
                 .AddBody(_body)
                 .SendRequest();
         }

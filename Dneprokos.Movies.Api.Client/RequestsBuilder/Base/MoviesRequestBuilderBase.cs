@@ -8,7 +8,8 @@ namespace Dneprokos.Movies.Api.Client.RequestsBuilder.Base
     {
         protected string? SearchUrl;
 
-        public KeyValuePair<string, string> DefaultAcceptHeader = new("accept", "application/json"); 
+        public KeyValuePair<string, string> DefaultAcceptHeader = new("Accept", "application/json");
+        public KeyValuePair<string, string> DefaultContentType = new("Content-Type", "application/json");
 
         public MoviesRequestBuilderBase(string baseUrl, ILogger logger)
             : base(baseUrl, logger)
