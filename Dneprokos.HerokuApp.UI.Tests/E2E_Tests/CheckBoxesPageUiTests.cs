@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace Dneprokos.HerokuApp.UI.Tests.E2E_Tests
 {
     [Parallelizable(ParallelScope.All)]
-    public class CheckBoxesPageTests : HerokuAppBaseTests
+    public class CheckBoxesPageUiTests : HerokuAppBaseTests
     {
         [Test]
         public void CheckAndUncheckCheckboxes_ShouldWork()

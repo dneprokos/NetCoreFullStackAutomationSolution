@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace Dneprokos.HerokuApp.UI.Tests.E2E_Tests
 {
     [Parallelizable(ParallelScope.All)]
-    public class SortableDataTablesTests : HerokuAppBaseTests
+    public class SortableDataTablesPageUiTests : HerokuAppBaseTests
     {
         [Test]
         [NonParallelizable]
