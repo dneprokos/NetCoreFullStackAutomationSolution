@@ -10,6 +10,8 @@
 
         public static string GenresBulk() => "genres/bulk";
 
+        public static string GenresSearch() => "genres/search";
+
         public static string Genres(int id) => $"/genres/{id}";
 
         public static string Movies() => "/movies";

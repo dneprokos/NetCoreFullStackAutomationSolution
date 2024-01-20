@@ -146,11 +146,32 @@ namespace Dneprokos.Api.Base.Client.Core
         /// Initialize Request with PUT method
         /// </summary>
         /// <param name="resourcePath">Resource url path</param>
-        /// <param name="authenticator"></param>
+        /// <param name="authenticator">Authentication</param>
         /// <returns></returns>
         public BaseApiClient UsePutMethod(string resourcePath, IAuthenticator authenticator)
         {
-            return AddRequest(resourcePath, Method.Put);
+            return AddRequest(resourcePath, authenticator, Method.Put);
+        }
+
+        /// <summary>
+        /// Initialize Request with DELETE method
+        /// </summary>
+        /// <param name="resourcePath">Resource url path</param>
+        /// <returns></returns>
+        public BaseApiClient UseDeleteMethod(string resourcePath)
+        {
+            return AddRequest(resourcePath, Method.Delete);
+        }
+
+        /// <summary>
+        /// Initialize Request with DELETE method
+        /// </summary>
+        /// <param name="resourcePath">Resource url path</param>
+        /// <param name="authenticator">Authentication</param>
+        /// <returns></returns>
+        public BaseApiClient UseDeleteMethod(string resourcePath, IAuthenticator authenticator)
+        {
+            return AddRequest(resourcePath, authenticator, Method.Delete);
         }
 
         /// <summary>
@@ -321,7 +342,13 @@ namespace Dneprokos.Api.Base.Client.Core
         /// <returns></returns>
         public BaseApiClient AddBody<T>(T model)
         {
-            string jsonBody = JsonConvert.SerializeObject(model);
+            var settings = new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore,
+                Formatting = Formatting.Indented // If you want pretty-printed JSON
+            };
+
+            string jsonBody = JsonConvert.SerializeObject(model, settings);
             request.AddBody(jsonBody, "application/json");
             return this;
         }
@@ -373,10 +400,10 @@ namespace Dneprokos.Api.Base.Client.Core
                         type = parameter.Type.ToString(),
                         value = parameter.Name!.Equals("Authorization") ?
                         "*************" :
-                            (parameter.Type.ToString().Equals("RequestBody") &&
-                                parameter.ContentType.ToString().Equals(ContentType.Json)) ?
-                                ConvertJsonString(parameter.Value) :
-                            parameter.Value
+                        (parameter.Type.ToString().Equals("RequestBody") &&
+                         parameter.ContentType.ToString().Equals(ContentType.Json)) ?
+                            ConvertJsonString(parameter.Value) :
+                        parameter.Value
                     })
                 };
 
@@ -413,28 +440,29 @@ namespace Dneprokos.Api.Base.Client.Core
                 return string.Empty;
             }
 
-            var jToken = JToken.FromObject(jsonValue);
-
-            if (jToken["query"] == null)
+            try
             {
+                var jToken = JToken.FromObject(jsonValue);
+
+                // If it's a JSON object or array, format it nicely
+                if (jToken is JObject || jToken is JArray)
+                {
+                    return jToken.ToString(Formatting.Indented);
+                }
+                // If it's a simple value, just return it as a string
+                else if (jToken is JValue jValue)
+                {
+                    return jValue.Value<string>()!;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log exception or handle it as needed
+                // For now, just return an empty string
                 return string.Empty;
             }
 
-            var queryValue = jToken["query"].Value<string>();
-
-            if (string.IsNullOrEmpty(queryValue))
-            {
-                return string.Empty;
-            }
-
-            // Remove leading and trailing whitespaces, including line breaks
-            queryValue = queryValue.Trim();
-
-            // Replace escaped newline characters with actual line breaks
-            queryValue = queryValue
-                .Replace("\\r\\n", Environment.NewLine);
-
-            return queryValue;
+            return string.Empty;
         }
 
         #endregion

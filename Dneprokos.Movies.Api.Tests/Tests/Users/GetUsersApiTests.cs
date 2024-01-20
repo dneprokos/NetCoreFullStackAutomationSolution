@@ -4,6 +4,7 @@ using Dneprokos.Api.Base.Client.Extenstions;
 using System.Net;
 using Dneprokos.Movies.Api.Client.Models.Users;
 using FluentAssertions;
+using Dneprokos.Movies.Api.Client.Data;
 
 namespace Dneprokos.Movies.Api.Tests.Tests.Users
 {
@@ -44,7 +45,7 @@ namespace Dneprokos.Movies.Api.Tests.Tests.Users
                 .Content!;
 
             //Assert
-            responseContent.Should().Be("Your user role cannot perform this operation");
+            responseContent.Should().Be(MoviesApiConstants.NoUserPermissionsMessage);
         }
     }
 }
