@@ -57,6 +57,15 @@ namespace Dneprokos.HerokuApp.UI.Client.Pages
         }
 
         /// <summary>
+        /// Gets the text of square A
+        /// </summary>
+        /// <returns></returns>
+        public string GetSquareAText()
+        {
+            return SquareADiv().Element.Text;
+        }
+
+        /// <summary>
         /// Gets the text of square B
         /// </summary>
         /// <returns></returns>

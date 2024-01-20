@@ -3,6 +3,8 @@ using Dneprokos.UI.Base.Client.SeleniumHelpers;
 using OpenQA.Selenium;
 using Dneprokos.UI.Base.Client.ComponentWrappers;
 using Dneprokos.UI.Base.Client.WebDriverCore;
+using NUnit.Framework;
+using Dneprokos.UI.Base.Client.Constants;
 
 namespace Dneprokos.HerokuApp.UI.Client.Pages
 {
@@ -22,6 +24,7 @@ namespace Dneprokos.HerokuApp.UI.Client.Pages
             => new(ConcurrentDriverManager
                 .CurrentDriver
                 .WaitUntilElementIsVisible(By.XPath(FirstLinkXPathSelector)));
+
         #endregion
 
         #region Action methods
@@ -55,6 +58,20 @@ namespace Dneprokos.HerokuApp.UI.Client.Pages
         public string GetFileNameOfFirstLink()
         {
             return FirstLink().GetText();
+        }
+
+        /// <summary>
+        /// Wait until file is downloaded
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public string WaitForFileDownloaded(string fileName)
+        {
+            string downloadPath = SeleniumConstants.DefaultDownloadDirectory();
+            var filePath = Path.Combine(downloadPath, fileName);
+            ConcurrentDriverManager.CurrentDriver.WaitForFileDownloaded(filePath);
+
+            return filePath;
         }
 
         #endregion

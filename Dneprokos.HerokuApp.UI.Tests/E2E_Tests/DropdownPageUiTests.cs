@@ -5,9 +5,8 @@ using NUnit.Framework;
 
 namespace Dneprokos.HerokuApp.UI.Tests.E2E_Tests
 {
-    [TestFixture]
     [Parallelizable(ParallelScope.All)]
-    public class DropdownPageTests : HerokuAppBaseTests
+    public class DropdownPageUiTests : HerokuAppBaseTests
     {
         [Test]
         public void SelectDropdownOption_ShoulBeSelected()

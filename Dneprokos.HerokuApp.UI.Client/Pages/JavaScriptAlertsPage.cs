@@ -3,12 +3,14 @@ using Dneprokos.UI.Base.Client.TestBaseClasses;
 using Dneprokos.UI.Base.Client.WebDriverCore;
 using OpenQA.Selenium;
 using Dneprokos.UI.Base.Client.SeleniumHelpers;
+using SeleniumExtras.WaitHelpers;
+using OpenQA.Selenium.Support.UI;
 
 namespace Dneprokos.HerokuApp.UI.Client.Pages
 {
-    public class AlertsPage : FrameworkBasePage
+    public class JavaScriptAlertsPage : FrameworkBasePage
     {
-        public static AlertsPage Instance => new();
+        public static JavaScriptAlertsPage Instance => new();
 
         #region Selectors
 
@@ -46,10 +48,10 @@ namespace Dneprokos.HerokuApp.UI.Client.Pages
         #region Action methods
 
         /// <summary>
-        /// Navigates to alerts page and returns new instance of <see cref="AlertsPage"/>
+        /// Navigates to alerts page and returns new instance of <see cref="JavaScriptAlertsPage"/>
         /// </summary>
         /// <returns></returns>
-        public AlertsPage NavigateToAlertsPage(string baseUrl)
+        public JavaScriptAlertsPage NavigateToAlertsPage(string baseUrl)
         {
             ConcurrentDriverManager.CurrentDriver.Navigate().GoToUrl(baseUrl + "/javascript_alerts");
             WaitForPageToLoad();
@@ -60,7 +62,7 @@ namespace Dneprokos.HerokuApp.UI.Client.Pages
         /// Clicks on the Click for JS Alert button
         /// </summary>
         /// <returns></returns>
-        public AlertsPage ClickForJSAlert()
+        public JavaScriptAlertsPage ClickForJSAlert()
         {
             ClickForJSAlertButton().Click();
             return this;
@@ -70,7 +72,7 @@ namespace Dneprokos.HerokuApp.UI.Client.Pages
         /// Clicks on the Click for JS Confirm button
         /// </summary>
         /// <returns></returns>
-        public AlertsPage ClickForJSConfirm()
+        public JavaScriptAlertsPage ClickForJSConfirm()
         {
             ClickForJSConfirmButton().Click();
             return this;
@@ -80,7 +82,7 @@ namespace Dneprokos.HerokuApp.UI.Client.Pages
         /// Clicks on the Click for JS Prompt button
         /// </summary>
         /// <returns></returns>
-        public AlertsPage ClickForJSPrompt()
+        public JavaScriptAlertsPage ClickForJSPrompt()
         {
             ClickForJSPromptButton().Click();
             return this;
@@ -90,7 +92,7 @@ namespace Dneprokos.HerokuApp.UI.Client.Pages
         /// Accepts the alert
         /// </summary>
         /// <returns></returns>
-        public AlertsPage AcceptAlert()
+        public JavaScriptAlertsPage AcceptAlert()
         {
             ConcurrentDriverManager.CurrentDriver.SwitchTo().Alert().Accept();
             return this;
@@ -100,7 +102,7 @@ namespace Dneprokos.HerokuApp.UI.Client.Pages
         /// Dismisses the alert
         /// </summary>
         /// <returns></returns>
-        public AlertsPage DismissAlert()
+        public JavaScriptAlertsPage DismissAlert()
         {
             ConcurrentDriverManager.CurrentDriver.SwitchTo().Alert().Dismiss();
             return this;
@@ -111,9 +113,12 @@ namespace Dneprokos.HerokuApp.UI.Client.Pages
         /// </summary>
         /// <param name="text">Text to send</param>
         /// <returns></returns>
-        public AlertsPage SendTextToAlert(string text)
+        public JavaScriptAlertsPage SendTextToAlertAndAccept(string text)
         {
-            ConcurrentDriverManager.CurrentDriver.SwitchTo().Alert().SendKeys(text);
+            WebDriverWait wait = new WebDriverWait(ConcurrentDriverManager.CurrentDriver, TimeSpan.FromSeconds(10));
+            IAlert prompt = wait.Until(ExpectedConditions.AlertIsPresent());
+            prompt.SendKeys(text);
+            prompt.Accept();
             return this;
         }
 
