@@ -8,7 +8,6 @@ using Dneprokos.UI.Base.Client.WebDriverCore.WebDriverOptions.Chrome;
 using Dneprokos.UI.Base.Client.WebDriverCore.WebDriverOptions.Common;
 using Microsoft.Extensions.Logging;
 using Dneprokos.UI.Base.Client.WebDriverCore.WebDriverOptions;
-using NUnit.Framework;
 using Dneprokos.UI.Base.Client.Constants;
 
 namespace Dneprokos.UI.Base.Client.WebDriverCore
