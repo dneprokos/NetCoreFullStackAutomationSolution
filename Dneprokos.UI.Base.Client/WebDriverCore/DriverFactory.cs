@@ -8,6 +8,8 @@ using Dneprokos.UI.Base.Client.WebDriverCore.WebDriverOptions.Chrome;
 using Dneprokos.UI.Base.Client.WebDriverCore.WebDriverOptions.Common;
 using Microsoft.Extensions.Logging;
 using Dneprokos.UI.Base.Client.WebDriverCore.WebDriverOptions;
+using NUnit.Framework;
+using Dneprokos.UI.Base.Client.Constants;
 
 namespace Dneprokos.UI.Base.Client.WebDriverCore
 {
@@ -80,6 +82,10 @@ namespace Dneprokos.UI.Base.Client.WebDriverCore
                 }
             }
 
+            // --- Add user profile preferences
+            string downloadsPath = CreateDownloadsDirectory();
+            options.AddUserProfilePreference("download.default_directory", downloadsPath);
+
             // --- Instantiate the driver
             if (driverOptions.IsRemote)
                 return CreateRemoteWebDriver(options, driverOptions.HubUri!);
@@ -107,6 +113,18 @@ namespace Dneprokos.UI.Base.Client.WebDriverCore
             }
             else options.AddArgument("--start-maximized");
 
+            // --- Add user profile preferences
+            string downloadsPath = CreateDownloadsDirectory();
+            //- Set Firefox Profile settings
+            FirefoxProfile profile = new FirefoxProfile();
+            profile.SetPreference("browser.download.folderList", 2); // Use custom download path
+            profile.SetPreference("browser.download.dir", downloadsPath); // Set custom download path
+            profile.SetPreference("browser.download.useDownloadDir", true); // Tell Firefox to use the custom download directory
+            profile.SetPreference("browser.helperApps.neverAsk.saveToDisk", "application/octet-stream"); // MIME type to save without asking (for automatic downloads)
+            // Add the profile to the options                                                                                             // Add the profile to the options
+            options.Profile = profile;
+
+
             // --- Instantiate the driver
             if (driverOptions.IsRemote)
                 return CreateRemoteWebDriver(options, driverOptions.HubUri!);
@@ -121,6 +139,20 @@ namespace Dneprokos.UI.Base.Client.WebDriverCore
             Log.LogInformation($"Remote driver will be initialized with Hub URL: {hubUri}");
             return new RemoteWebDriver(new Uri(hubUri), driverOptions);
         }
+
+        private static string CreateDownloadsDirectory()
+        {
+            string downloadPath = SeleniumConstants.DefaultDownloadDirectory();
+
+            // Ensure the download directory is empty and exists
+            if (Directory.Exists(downloadPath))
+            {
+                Directory.Delete(downloadPath, true);
+            }
+            Directory.CreateDirectory(downloadPath);
+
+            return downloadPath;
+        } 
 
         #endregion
     }

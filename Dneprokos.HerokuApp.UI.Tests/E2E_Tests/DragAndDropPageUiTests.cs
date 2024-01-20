@@ -12,7 +12,8 @@ namespace Dneprokos.HerokuApp.UI.Tests.E2E_Tests
         public void DragAndDrop_ComponentAtoB_ComponentsExchangeUiTest()
         {
             //Arrange
-            DragAndDropPage page = DragAndDropPage.Instance.NavigateToDragAndDropPage(BaseUrl!);
+            DragAndDropPage page = DragAndDropPage.Instance
+                .NavigateToDragAndDropPage(BaseUrl!);
             string expectedText = page.GetSquareAText();
 
             //Act

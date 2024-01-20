@@ -1,4 +1,6 @@
-﻿namespace Dneprokos.UI.Base.Client.Constants
+﻿using NUnit.Framework;
+
+namespace Dneprokos.UI.Base.Client.Constants
 {
     public class SeleniumConstants
     {
@@ -11,5 +13,8 @@
         /// Default maximum number of retries for actions
         /// </summary>
         public const int DefaultRetryCount = 3;
+
+        public static string DefaultDownloadDirectory()
+            => Path.Combine(TestContext.CurrentContext.TestDirectory, "Downloads");
     }
 }
