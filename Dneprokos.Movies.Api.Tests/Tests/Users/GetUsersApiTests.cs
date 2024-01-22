@@ -5,13 +5,19 @@ using System.Net;
 using Dneprokos.Movies.Api.Client.Models.Users;
 using FluentAssertions;
 using Dneprokos.Movies.Api.Client.Data;
+using NUnit.Allure.Attributes;
+using Dneprokos.Movies.Api.Tests.Utils;
+using Allure.Net.Commons;
 
 namespace Dneprokos.Movies.Api.Tests.Tests.Users
 {
-    [TestFixture]
+    [AllureSuite("USERS")]
+    [AllureSubSuite("GET /users")]
     public class GetUsersApiTests : MoviesApiTestBase
     {
         [Test]
+        [AllureTag(AllureTags.MainFlow)]
+        [AllureSeverity(SeverityLevel.critical)]
         public void GetUsers_WithAdminToken_ShouldBeReturned()
         {
             //Arrange
@@ -33,6 +39,7 @@ namespace Dneprokos.Movies.Api.Tests.Tests.Users
         }
 
         [Test]
+        [AllureSeverity(SeverityLevel.critical)]
         public void GetUsers_WithRegularToken_ShouldBeForbidden()
         {
             //Arrange

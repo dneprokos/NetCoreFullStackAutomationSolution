@@ -1,8 +1,6 @@
 ﻿using Dneprokos.HerokuApp.UI.Client.Pages.DataTablesComponents;
-using Dneprokos.UI.Base.Client.SeleniumHelpers;
 using Dneprokos.UI.Base.Client.TestBaseClasses;
 using Dneprokos.UI.Base.Client.WebDriverCore;
-using OpenQA.Selenium;
 
 namespace Dneprokos.HerokuApp.UI.Client.Pages
 {

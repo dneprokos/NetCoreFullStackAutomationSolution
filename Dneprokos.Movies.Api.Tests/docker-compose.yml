@@ -1,0 +1,8 @@
+version: "3"
+services:
+  reports:
+    container_name: e2e-allure-reports
+    build: .
+    image: dneprokos/e2e-allure-reports
+    ports:               
+      - "9999:9999"

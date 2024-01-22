@@ -1,20 +1,27 @@
-﻿using Dneprokos.Api.Base.Client.Extenstions;
+﻿using Allure.Net.Commons;
+using Dneprokos.Api.Base.Client.Extenstions;
 using Dneprokos.Movies.Api.Client.Data;
 using Dneprokos.Movies.Api.Client.Models._BaseModels;
 using Dneprokos.Movies.Api.Client.Models.Genres;
 using Dneprokos.Movies.Api.Tests.AssertionHelpers;
 using Dneprokos.Movies.Api.Tests.BaseClasses;
+using Dneprokos.Movies.Api.Tests.Utils;
 using FluentAssertions;
 using FluentAssertions.Execution;
+using NUnit.Allure.Attributes;
 using NUnit.Framework;
 using System.Net;
 
 namespace Dneprokos.Movies.Api.Tests.Tests.Genres
 {
     [NonParallelizable]
+    [AllureSuite("GENRES")]
+    [AllureSubSuite("GET /genres/search")]
     public class SearchGenresApiTests : MoviesApiTestBase
     {
         [Test]
+        [AllureTag(AllureTags.MainFlow)]
+        [AllureSeverity(SeverityLevel.critical)]
         public void SearcgGenres_PartialName_ShouldBeFound()
         {
             //Arrange
@@ -41,6 +48,7 @@ namespace Dneprokos.Movies.Api.Tests.Tests.Genres
 
         [TestCase(1, 2)]
         [TestCase(2, 1)]
+        [AllureSeverity(SeverityLevel.normal)]
         public void SearcgGenres_WithValidPageNumberAndLimit_ShouldShownWithPagination(int pageNumber, int pageLimit)
         {
             //Arrange
@@ -65,6 +73,7 @@ namespace Dneprokos.Movies.Api.Tests.Tests.Genres
 
         [TestCase(0)]
         [TestCase(-1)]
+        [AllureSeverity(SeverityLevel.minor)]
         public void SearcgGenres_WithPageNumberLessThanMin_ShouldBeBadRequest(int pageNumber)
         {
             //Arrange
@@ -83,6 +92,7 @@ namespace Dneprokos.Movies.Api.Tests.Tests.Genres
 
         [TestCase(0)]
         [TestCase(-1)]
+        [AllureSeverity(SeverityLevel.minor)]
         public void SearcgGenres_WithPageLimitLessThanMin_ShouldBeBadRequest(int pageLimit)
         {
             //Arrange
