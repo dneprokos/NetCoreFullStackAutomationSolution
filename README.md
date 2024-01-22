@@ -117,3 +117,19 @@ This is a project with REST API tests for the Movies microservice
 2) Type the following command "dotnet test --settings localhost5000.runsettings"
 
 Note: You can update runsettings file name and run with runsetting you need
+
+- Allure reports
+There are two ways how you can run Allure reports for this project. 
+But it both way you need to have installed Allure command line - https://www.npmjs.com/package/allure-commandline
+
+a) Run server locally
+
+1) You need to have installed Java 8+ version
+2) Open PowerShell for specified project and run already prepared script "GenerateAllureReportAndOpenLocally.ps1"
+
+b) Run server in Docker container
+
+1) You need to have Docker and Docker-compose installed
+2) Open PowerShell for specified project and run already prepared script "GenerateAllureReportAndOpenUsingDocker.ps1" 
+
+![movies_api_allure image](/images/movies_api_allure.png) 
