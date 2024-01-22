@@ -1,22 +1,25 @@
-﻿using Dneprokos.Api.Base.Client.Extenstions;
+﻿using Allure.Net.Commons;
+using Dneprokos.Api.Base.Client.Extenstions;
 using Dneprokos.Helper.Base.Client.RandomGenerators;
 using Dneprokos.Movies.Api.Client.Data;
 using Dneprokos.Movies.Api.Client.Models.Genres;
 using Dneprokos.Movies.Api.Client.RequestActions;
 using Dneprokos.Movies.Api.Tests.BaseClasses;
+using Dneprokos.Movies.Api.Tests.Utils;
 using FluentAssertions;
 using FluentAssertions.Execution;
+using NUnit.Allure.Attributes;
 using NUnit.Framework;
-using RestSharp;
 using System.Net;
 
 namespace Dneprokos.Movies.Api.Tests.Tests.Genres
 {
     [Parallelizable]
+    [AllureSuite("GENRES")]
+    [AllureSubSuite("POST /genres")]
     public class CreateGenreApiTests : MoviesApiTestBase
     {
-        private List<int> _idsToCleanUp = new List<int>();
-
+        private List<int> _idsToCleanUp = new();
 
         [OneTimeTearDown]
         public void AfterFeature()
@@ -26,6 +29,8 @@ namespace Dneprokos.Movies.Api.Tests.Tests.Genres
         }
 
         [Test]
+        [AllureTag(AllureTags.MainFlow)]
+        [AllureSeverity(SeverityLevel.critical)]
         public void CreateGenre_WithValidNameLength_ShouldBeCreated()
         {
             //Arrange
@@ -48,6 +53,7 @@ namespace Dneprokos.Movies.Api.Tests.Tests.Genres
         }
 
         [Test]
+        [AllureSeverity(SeverityLevel.minor)]
         public void CreateGenre_WithNameLessThanMinSymbols_ShouldBeBadRequest()
         {
             //Arrange
@@ -66,6 +72,7 @@ namespace Dneprokos.Movies.Api.Tests.Tests.Genres
         }
 
         [Test]
+        [AllureSeverity(SeverityLevel.critical)]
         public void CreateGenre_WithNonAdminToken_ShouldBeForbidden()
         {
             //Arrange

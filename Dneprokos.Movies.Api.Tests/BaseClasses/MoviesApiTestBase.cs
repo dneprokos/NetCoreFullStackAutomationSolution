@@ -1,11 +1,13 @@
 ﻿using Dneprokos.Movies.Api.Client.RequestsBuilder.Facade;
 using Microsoft.Extensions.Logging;
+using NUnit.Allure.Core;
 using NUnit.Framework;
 using RestSharp.Authenticators;
 
 namespace Dneprokos.Movies.Api.Tests.BaseClasses
 {
     [TestFixture]
+    [AllureNUnit]
     public class MoviesApiTestBase
     {
         public static string? BaseUrl;

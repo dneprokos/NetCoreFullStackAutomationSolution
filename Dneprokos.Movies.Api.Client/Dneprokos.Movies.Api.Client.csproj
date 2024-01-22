@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Dneprokos.Api.Base.Client\Dneprokos.Api.Base.Client.csproj" />
+    <ProjectReference Include="..\Dneprokos.Helper.Base.Client\Dneprokos.Helper.Base.Client.csproj" />
   </ItemGroup>
 
   <ItemGroup>
