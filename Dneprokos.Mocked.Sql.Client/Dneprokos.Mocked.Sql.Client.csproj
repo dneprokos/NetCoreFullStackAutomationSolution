@@ -6,4 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="ConcreateFactory\PostgreSql\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dneprokos.SqlDb.Base.Client\Dneprokos.SqlDb.Base.Client.csproj" />
+  </ItemGroup>
+
 </Project>

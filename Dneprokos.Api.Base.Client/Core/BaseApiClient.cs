@@ -7,7 +7,7 @@ using System.Net;
 
 namespace Dneprokos.Api.Base.Client.Core
 {
-    public class BaseApiClient
+    public class BaseApiClient : IApiClient
     {
         private readonly RestClient restClient;
         private RestRequest request;
@@ -69,7 +69,7 @@ namespace Dneprokos.Api.Base.Client.Core
         /// <param name="resourcePath">Resource url path</param>
         /// <param name="method">Method</param>
         /// <returns></returns>
-        public BaseApiClient AddRequest(string resourcePath, Method method)
+        public IApiClient AddRequest(string resourcePath, Method method)
         {
             request = new RestRequest(resourcePath, method);
             return this;
@@ -82,7 +82,7 @@ namespace Dneprokos.Api.Base.Client.Core
         /// <param name="authenticator">Authentication</param>
         /// <param name="method">Method</param>
         /// <returns></returns>
-        public BaseApiClient AddRequest(string resourcePath, IAuthenticator authenticator, Method method)
+        public IApiClient AddRequest(string resourcePath, IAuthenticator authenticator, Method method)
         {
             request = new RestRequest(resourcePath, method)
             {
@@ -96,7 +96,7 @@ namespace Dneprokos.Api.Base.Client.Core
         /// </summary>
         /// <param name="resourcePath">Resource url path</param>
         /// <returns></returns>
-        public BaseApiClient UsePostMethod(string resourcePath)
+        public IApiClient UsePostMethod(string resourcePath)
         {
             return AddRequest(resourcePath, Method.Post);
         }
@@ -106,7 +106,7 @@ namespace Dneprokos.Api.Base.Client.Core
         /// </summary>
         /// <param name="resourcePath">Resource url path</param>
         /// <returns></returns>
-        public BaseApiClient UsePostMethod(string resourcePath, IAuthenticator authenticator)
+        public IApiClient UsePostMethod(string resourcePath, IAuthenticator authenticator)
         {
             return AddRequest(resourcePath, authenticator, Method.Post);
         }
@@ -116,7 +116,7 @@ namespace Dneprokos.Api.Base.Client.Core
         /// </summary>
         /// <param name="resourcePath">Resource url path</param>
         /// <returns></returns>
-        public BaseApiClient UseGetMethod(string resourcePath)
+        public IApiClient UseGetMethod(string resourcePath)
         {
             return AddRequest(resourcePath, Method.Get);
         }
@@ -127,7 +127,7 @@ namespace Dneprokos.Api.Base.Client.Core
         /// <param name="resourcePath">Resource url path</param>
         /// <param name="authenticator">Authentication</param>
         /// <returns></returns>
-        public BaseApiClient UseGetMethod(string resourcePath, IAuthenticator authenticator)
+        public IApiClient UseGetMethod(string resourcePath, IAuthenticator authenticator)
         {
             return AddRequest(resourcePath, authenticator, Method.Get);
         }
@@ -137,7 +137,7 @@ namespace Dneprokos.Api.Base.Client.Core
         /// </summary>
         /// <param name="resourcePath">Resource url path</param>
         /// <returns></returns>
-        public BaseApiClient UsePutMethod(string resourcePath)
+        public IApiClient UsePutMethod(string resourcePath)
         {
             return AddRequest(resourcePath, Method.Put);
         }
@@ -148,7 +148,7 @@ namespace Dneprokos.Api.Base.Client.Core
         /// <param name="resourcePath">Resource url path</param>
         /// <param name="authenticator">Authentication</param>
         /// <returns></returns>
-        public BaseApiClient UsePutMethod(string resourcePath, IAuthenticator authenticator)
+        public IApiClient UsePutMethod(string resourcePath, IAuthenticator authenticator)
         {
             return AddRequest(resourcePath, authenticator, Method.Put);
         }
@@ -158,7 +158,7 @@ namespace Dneprokos.Api.Base.Client.Core
         /// </summary>
         /// <param name="resourcePath">Resource url path</param>
         /// <returns></returns>
-        public BaseApiClient UseDeleteMethod(string resourcePath)
+        public IApiClient UseDeleteMethod(string resourcePath)
         {
             return AddRequest(resourcePath, Method.Delete);
         }
@@ -169,7 +169,7 @@ namespace Dneprokos.Api.Base.Client.Core
         /// <param name="resourcePath">Resource url path</param>
         /// <param name="authenticator">Authentication</param>
         /// <returns></returns>
-        public BaseApiClient UseDeleteMethod(string resourcePath, IAuthenticator authenticator)
+        public IApiClient UseDeleteMethod(string resourcePath, IAuthenticator authenticator)
         {
             return AddRequest(resourcePath, authenticator, Method.Delete);
         }
@@ -179,7 +179,7 @@ namespace Dneprokos.Api.Base.Client.Core
         /// </summary>
         /// <param name="resourcePath">Resource url path</param>
         /// <returns></returns>
-        public BaseApiClient UsePatchMethod(string resourcePath)
+        public IApiClient UsePatchMethod(string resourcePath)
         {
             return AddRequest(resourcePath, Method.Patch);
         }
@@ -190,7 +190,7 @@ namespace Dneprokos.Api.Base.Client.Core
         /// <param name="resourcePath">Resource url path</param>
         /// <param name="authenticator">Authentication</param>
         /// <returns></returns>
-        public BaseApiClient UsePatchMethod(string resourcePath, IAuthenticator authenticator)
+        public IApiClient UsePatchMethod(string resourcePath, IAuthenticator authenticator)
         {
             return AddRequest(resourcePath, authenticator, Method.Patch);
         }
@@ -200,7 +200,7 @@ namespace Dneprokos.Api.Base.Client.Core
         /// </summary>
         /// <param name="resourcePath">Resource url path</param>
         /// <returns></returns>
-        public BaseApiClient UseSearchMethod(string resourcePath)
+        public IApiClient UseSearchMethod(string resourcePath)
         {
             return AddRequest(resourcePath, Method.Search);
         }
@@ -211,7 +211,7 @@ namespace Dneprokos.Api.Base.Client.Core
         /// <param name="resourcePath">Resource url path</param>
         /// <param name="authenticator">Authentication</param>
         /// <returns></returns>
-        public BaseApiClient UseSearchMethod(string resourcePath, IAuthenticator authenticator)
+        public IApiClient UseSearchMethod(string resourcePath, IAuthenticator authenticator)
         {
             return AddRequest(resourcePath, authenticator, Method.Search);
         }
@@ -221,7 +221,7 @@ namespace Dneprokos.Api.Base.Client.Core
         /// </summary>
         /// <param name="resourcePath">Resource url path</param>
         /// <returns></returns>
-        public BaseApiClient UseCopyMethod(string resourcePath)
+        public IApiClient UseCopyMethod(string resourcePath)
         {
             return AddRequest(resourcePath, Method.Copy);
         }
@@ -232,7 +232,7 @@ namespace Dneprokos.Api.Base.Client.Core
         /// <param name="resourcePath">Resource url path</param>
         /// <param name="authenticator">Authentication</param>
         /// <returns></returns>
-        public BaseApiClient UseCopyMethod(string resourcePath, IAuthenticator authenticator)
+        public IApiClient UseCopyMethod(string resourcePath, IAuthenticator authenticator)
         {
             return AddRequest(resourcePath, authenticator, Method.Copy);
         }
@@ -246,7 +246,7 @@ namespace Dneprokos.Api.Base.Client.Core
         /// </summary>
         /// <param name="header">Header KeyValuePair</param>
         /// <returns></returns>
-        public BaseApiClient AddHeader(KeyValuePair<string, string> header)
+        public IApiClient AddHeader(KeyValuePair<string, string> header)
         {
             restClient.AddDefaultHeader(header.Key, header.Value);
             return this;
@@ -258,7 +258,7 @@ namespace Dneprokos.Api.Base.Client.Core
         /// <param name="key">Header key</param>
         /// <param name="value">Header value</param>
         /// <returns></returns>
-        public BaseApiClient AddHeader(string key, string value)
+        public IApiClient AddHeader(string key, string value)
         {
             restClient.AddDefaultHeader(key, value);
             return this;
@@ -269,7 +269,7 @@ namespace Dneprokos.Api.Base.Client.Core
         /// </summary>
         /// <param name="headers">Dictionary of headers</param>
         /// <returns></returns>
-        public BaseApiClient AddHeaders(Dictionary<string, string> headers)
+        public IApiClient AddHeaders(Dictionary<string, string> headers)
         {
             restClient.AddDefaultHeaders(headers);
             return this;
@@ -287,7 +287,7 @@ namespace Dneprokos.Api.Base.Client.Core
         /// <param name="path">Path</param>
         /// <param name="domain">Domain</param>
         /// <returns></returns>
-        public BaseApiClient AddCookie(string name, string value, string path, string domain)
+        public IApiClient AddCookie(string name, string value, string path, string domain)
         {
             request.AddCookie(name, value, path, domain);
             return this;
@@ -298,7 +298,7 @@ namespace Dneprokos.Api.Base.Client.Core
         /// </summary>
         /// <param name="cookieContainer">Container with cookies</param>
         /// <returns></returns>
-        public BaseApiClient AddCookies(CookieContainer cookieContainer)
+        public IApiClient AddCookies(CookieContainer cookieContainer)
         {
             request.CookieContainer = cookieContainer;
             return this;
@@ -313,7 +313,7 @@ namespace Dneprokos.Api.Base.Client.Core
         /// </summary>
         /// <param name="method">Http method</param>
         /// <returns></returns>
-        public BaseApiClient AddMethod(Method method)
+        public IApiClient AddMethod(Method method)
         {
             request.Method = method;
             return this;
@@ -328,7 +328,7 @@ namespace Dneprokos.Api.Base.Client.Core
         /// </summary>
         /// <param name="queryString"></param>
         /// <returns></returns>
-        public BaseApiClient AddBody(string queryString)
+        public IApiClient AddBody(string queryString)
         {
             request.AddBody(new { query = queryString });
             return this;
@@ -340,7 +340,7 @@ namespace Dneprokos.Api.Base.Client.Core
         /// <typeparam name="T">ObjectType</typeparam>
         /// <param name="model">Object to pass</param>
         /// <returns></returns>
-        public BaseApiClient AddBody<T>(T model)
+        public IApiClient AddBody<T>(T model)
         {
             var settings = new JsonSerializerSettings
             {
@@ -463,6 +463,16 @@ namespace Dneprokos.Api.Base.Client.Core
             }
 
             return string.Empty;
+        }
+
+        public IApiClient AddQueryParameter(string name, string value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IApiClient AddQueryParameters(Dictionary<string, string> parameters)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

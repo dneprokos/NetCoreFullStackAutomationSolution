@@ -10,4 +10,8 @@
     <ProjectReference Include="..\Dneprokos.UI.Base.Client\Dneprokos.UI.Base.Client.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\Examples\" />
+  </ItemGroup>
+
 </Project>

@@ -27,7 +27,8 @@ namespace Dneprokos.Movies.Api.Client.RequestsBuilder
             return this;
         }
 
-        public AuthorizationRequestBuilder WithQueryAuthorizationParams(AuthorizationRequestParams queryParams) 
+        public AuthorizationRequestBuilder WithQueryAuthorizationParams(
+            AuthorizationRequestParams queryParams) 
         {
             SearchUrl = SearchUrl.SetQueryParam("username", queryParams.UserName);
             SearchUrl = SearchUrl.SetQueryParam("password", queryParams.Password);

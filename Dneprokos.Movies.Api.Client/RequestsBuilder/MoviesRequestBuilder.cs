@@ -71,13 +71,21 @@ namespace Dneprokos.Movies.Api.Client.RequestsBuilder
                 .SendRequest();
         }
 
-        // TODO: Create movie
-        public RestResponse SendPostGenres(IAuthenticator authenticator)
+        public RestResponse SendPost(IAuthenticator authenticator)
         {
             return UsePostMethod(MoviesEndpointsUrls.Movies(), authenticator)
                 .AddHeader(DefaultAcceptHeader)
                 .AddHeader(DefaultContentType)
                 .AddBody(_body)
+                .SendRequest();
+        }
+
+        public RestResponse SendPost(IAuthenticator authenticator, MovieApiModel body)
+        {
+            return UsePostMethod(MoviesEndpointsUrls.Movies(), authenticator)
+                .AddHeader(DefaultAcceptHeader)
+                .AddHeader(DefaultContentType)
+                .AddBody(body)
                 .SendRequest();
         }
 

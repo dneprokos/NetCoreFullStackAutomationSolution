@@ -89,5 +89,56 @@ namespace Dneprokos.Movies.Api.Tests.Tests.Genres
             //Assert
             responseContent.Should().Be(MoviesApiConstants.NoUserPermissionsMessage);
         }
+
+        [Test]
+        public void Temp()
+        {
+            //Arrange
+            var test = StringGenerator.GenerateRandomString(100);
+
+            //Act
+            char [] chars = test.ToCharArray();
+            Dictionary<char, int> charsRepeatCount = new();
+
+            foreach (char c in chars)
+            {
+                bool isContain = charsRepeatCount.ContainsKey(c);
+                if (isContain)
+                    charsRepeatCount[c] += 1;
+                else charsRepeatCount.Add(c, 1);
+            }
+
+            //Assert
+            foreach (KeyValuePair<char, int> pair in charsRepeatCount)
+            {
+                Console.WriteLine($"KEY: {pair.Key}, VALUE: {pair.Value}");
+            }
+
+
+            var pairWithMaxValue = charsRepeatCount.MaxBy(pair => pair.Value);
+            Console.WriteLine($"Pair with max value KEY: {pairWithMaxValue.Key}, VALUE: {pairWithMaxValue.Value}");
+        }
+
+        [Test]
+        public void Temp2()
+        {
+            var excludeChars = new List<char> { ',', ' ', '!', '<', '#'};
+            var test = "blaffdf , !asfdsfdfd< # csfdsdfsdfsdfsdf";
+
+            var filtered = new string(test.Where(@char => !excludeChars.Contains(@char)).ToArray());
+
+        }
+
+        [Test]
+        public void Temp3()
+        {
+            var list = new List<string> { "test", "Test", "tset" };
+            List<string> capitalizedWords = list.Where(s => char.IsUpper(s[0])).ToList();
+
+            var aggregate = list.Aggregate((a, b) =>  a + b);
+            Console.WriteLine(aggregate);
+
+            var list2 = new List<string> { "test", "test" };
+        }
     }
 }

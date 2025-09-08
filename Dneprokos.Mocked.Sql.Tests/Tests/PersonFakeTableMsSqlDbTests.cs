@@ -48,14 +48,14 @@ namespace Dneprokos.Mocked.Sql.Tests.Tests
         [Test]
         public void ExecuteQuery_UnitTest()
         {
-            //Arrange
+            // Arrange
             
-            //Act
+            // Act
             List<PersonDbModel> allPersons = SqlScriptsRunner!
                 .ExecuteQuery<PersonDbModel>("SELECT * FROM PERSON")
                 .ToList();
 
-            //Assert
+            // Assert
             allPersons.Should().HaveCount(allPersonsInDb!.Count);
             allPersons.Should()
                 .BeEquivalentTo(allPersonsInDb, p => p.Excluding(p => p.Id));
@@ -64,63 +64,78 @@ namespace Dneprokos.Mocked.Sql.Tests.Tests
         [Test]
         public void ExecuteQueryFirst_UnitTest()
         {
-            //Arrange
+            // Arrange
             PersonDbModel expectedFirstPerson = allPersonsInDb!.First();
 
-            //Act
+            // Act
             PersonDbModel firstPerson = SqlScriptsRunner!
                 .ExecuteQueryFirst<PersonDbModel>("SELECT * FROM PERSON");
 
-            //Assert
+            // Assert
             firstPerson.Should().BeEquivalentTo(expectedFirstPerson);
         }
 
         [Test]
         public void ExecuteQueryFirstOrDefault_UnitTest()
         {
-            //Arrange
+            // Arrange
             string searchFirstName = "Jane";
             PersonDbModel expectedFirstPerson = allPersonsInDb!.First(p => p.FirstName == searchFirstName);
 
-            //Act
+            // Act
             PersonDbModel firstPerson = SqlScriptsRunner!
                 .ExecuteQueryFirst<PersonDbModel>(
                     $"SELECT * FROM PERSON WHERE {nameof(PersonDbModel.FirstName)} = '{searchFirstName}'");
 
-            //Assert
+            // Assert
             firstPerson.Should().BeEquivalentTo(expectedFirstPerson);
         }
 
         [Test]
         public void ExecuteQuerySingle_UnitTest()
         {
-            //Arrange
+            // Arrange
             string searchFirstName = "Jane";
             PersonDbModel expectedSinglePerson = allPersonsInDb!.First(p => p.FirstName == searchFirstName);
 
-            //Act
+            // Act
             PersonDbModel singlePerson = SqlScriptsRunner!
                 .ExecuteQuerySingle<PersonDbModel>(
                     $"SELECT * FROM PERSON WHERE {nameof(PersonDbModel.FirstName)} = '{searchFirstName}'");
 
-            //Assert
+            // Assert
             singlePerson.Should().BeEquivalentTo(expectedSinglePerson);
         }
 
         [Test]
         public void ExecuteQuerySingleOrDefault_UnitTest()
         {
-            //Arrange
+            // Arrange
             string searchFirstName = "Jane";
             PersonDbModel expectedSingleOrDefaultPerson = allPersonsInDb!.First(p => p.FirstName == searchFirstName);
 
-            //Act
+            // Act
             PersonDbModel singleOrDefaultPerson = SqlScriptsRunner!
                 .ExecuteQuerySingleOrDefault<PersonDbModel>(
                     $"SELECT * FROM PERSON WHERE {nameof(PersonDbModel.FirstName)} = '{searchFirstName}'");
 
-            //Assert
+            // Assert
             singleOrDefaultPerson.Should().BeEquivalentTo(expectedSingleOrDefaultPerson);
+        }
+
+        [Test]
+        public void ExecuteQuery_UsingAbstractFactory_UnitTest() 
+        {
+            // Arrange
+            PersonDbModel firstPerson = allPersonsInDb!.First();
+
+            // Act
+            PersonDbModel firstPersonInDb = SqlDataBase!
+                .PersonTable()
+                .GetPersonById(firstPerson.Id);
+
+            // Assert
+            firstPersonInDb.Should().BeEquivalentTo(firstPerson);
         }
     }
 }

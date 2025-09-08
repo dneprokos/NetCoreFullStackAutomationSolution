@@ -15,7 +15,6 @@ namespace Dneprokos.SqlDb.Base.Client.SqlCore.Factory
         /// </summary>
         /// <param name="provider"></param>
         /// <param name="connectionString"></param>
-        /// <param name="logger"></param>
         /// <exception cref="NotImplementedException"></exception>
         public SqlConnectionFactory(SupportedSqlProviders provider, string connectionString)
         {

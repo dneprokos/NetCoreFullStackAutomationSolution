@@ -8,6 +8,7 @@ using Dneprokos.Movies.Api.Client.Data;
 using NUnit.Allure.Attributes;
 using Dneprokos.Movies.Api.Tests.Utils;
 using Allure.Net.Commons;
+using Dneprokos.Api.Base.Client.Core;
 
 namespace Dneprokos.Movies.Api.Tests.Tests.Users
 {
@@ -36,6 +37,29 @@ namespace Dneprokos.Movies.Api.Tests.Tests.Users
 
             //Assert
             responseUsers.Should().BeEquivalentTo(expectedUsers, p => p.Excluding(p => p.Password));
+        }
+
+        public void GetUsers_RetryApiClient_ShouldBeReturned()
+        {
+            // Arrange
+            var expectedUsers = new List<UserApiModel>
+            {
+                new UserApiModel {Id = 1, Username = "testadmin", Role = "admin"},
+                new UserApiModel {Id = 2, Username = "test", Role = "member"},
+            };
+
+            var apiClient = new RetryApiClient(
+                new BaseApiClient(BaseUrl!, Logger));
+
+            // Act
+            var response = apiClient
+                .AddBody(expectedUsers)
+                .SendRequest()
+                .VerifyStatusCodeIsEqualTo(HttpStatusCode.OK)
+                .ConvertJsonToModel<List<UserApiModel>>()!;
+            
+
+            // Assert
         }
 
         [Test]

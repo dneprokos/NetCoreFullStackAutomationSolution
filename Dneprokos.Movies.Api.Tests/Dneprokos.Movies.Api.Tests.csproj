@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Tests\Movies\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Dneprokos.Helper.Base.Client\Dneprokos.Helper.Base.Client.csproj" />
     <ProjectReference Include="..\Dneprokos.Movies.Api.Client\Dneprokos.Movies.Api.Client.csproj" />
   </ItemGroup>
